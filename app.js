@@ -3,8 +3,11 @@ var data = {
   showParagraph: false
 }
 
+Vue.component('hello', {
+    template: '<h1>Hello!</h1>'
+});
+
 var vm1 = new Vue({
-  el: '#app1',
   data: data,
   methods: {
     show: function() {
@@ -27,8 +30,7 @@ var vm1 = new Vue({
   }
 });
 
-console.log(vm1.$data === data);
-vm1.$refs.heading.innerText = 'Something else';
+vm1.$mount('#app1');
 
 setTimeout(function() {
     vm1.title = 'Changed by Timer';
@@ -45,4 +47,11 @@ var vm2 = new Vue({
             vm1.title = 'Changed!';
         }
     }
-})
+});
+
+var vm3 = new Vue({
+    template: '<h1>Hello!</h1>'
+});
+
+vm3.$mount();
+document.getElementById('app3').appendChild(vm3.$el);
