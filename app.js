@@ -1,9 +1,11 @@
-new Vue({
-  el: '#app',
-  data: {
-    title: 'The VueJS Instance',
-    showParagraph: false
-  },
+var data = {
+  title: 'The VueJS Instance',
+  showParagraph: false
+}
+
+var vm1 = new Vue({
+  el: '#app1',
+  data: data,
   methods: {
     show: function() {
       this.showParagraph = true;
@@ -24,3 +26,23 @@ new Vue({
     }
   }
 });
+
+console.log(vm1.$data === data);
+vm1.$refs.heading.innerText = 'Something else';
+
+setTimeout(function() {
+    vm1.title = 'Changed by Timer';
+    vm1.show();
+}, 3000);
+
+var vm2 = new Vue({
+    el: '#app2',
+    data: {
+        title: 'The second Instance'
+    },
+    methods: {
+        onChange: function() {
+            vm1.title = 'Changed!';
+        }
+    }
+})
